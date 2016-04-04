@@ -10,7 +10,8 @@ addons:
 jdk:
   - oraclejdk8
 script:
-  - sbt "set crossPaths := true" test
+  # Clean before build
+  - sbt clean "set crossPaths := true" test
 cache:
   directories:
     - $HOME/.ivy2/cache
