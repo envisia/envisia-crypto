@@ -1,6 +1,6 @@
 organization := "de.envisia"
 
-name := """envisia-crypto"""
+name := """crypto"""
 
 autoScalaLibrary := false
 crossPaths := false
@@ -13,3 +13,6 @@ libraryDependencies ++= Seq(
 )
 
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
+
+licenses +=("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
+bintrayOrganization := Some("envisia")
