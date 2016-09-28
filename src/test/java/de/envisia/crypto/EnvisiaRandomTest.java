@@ -8,17 +8,17 @@ public class EnvisiaRandomTest {
 
     private EnvisiaRandom random = new EnvisiaRandomImpl();
 
-    @Test(timeout = 100)
+    @Test(timeout = 1000)
     public void generateTokenNotTakeLongerThan100ms() throws InterruptedException {
         random.token(12);
     }
 
-    @Test(timeout = 100)
+    @Test(timeout = 1000)
     public void generateTokenAlsoNotTakeLongerThan100ms() {
         random.token(Base64.getUrlEncoder(), 20);
     }
 
-    @Test(timeout = 100)
+    @Test(timeout = 1000)
     public void multipleCallsInLessThan100ms() {
         for(int i = 0; i < 12; i++) {
             random.token(Base64.getUrlEncoder(), 20);
