@@ -13,13 +13,18 @@ public class PasswordValidatorTest {
     private PasswordValidator validator = new PasswordValidatorImpl(injector);
 
     @Test
-    public void returnTrueOnCorrectPassword() {
+    public void returnTrueOnCorrectPassword() throws HasherNotFoundException {
         assertEquals(true, validator.verify("helloworld", hash));
     }
 
     @Test
-    public void returnFalseOnIncorrectPassword() {
+    public void returnFalseOnIncorrectPassword() throws HasherNotFoundException {
         assertEquals(false, validator.verify("hello", hash));
+    }
+
+    @Test(expected = HasherNotFoundException.class)
+    public void throwAExceptionIftheHasherCouldntBeFound() throws HasherNotFoundException {
+        validator.verify("hello", "bcrypt$24000$ESdo1tMjzlaSDX8H$TRIq5V0m4f9+2THo3L/y5G+syVv1OL7TJ/UGRScWwwE=");
     }
 
 }

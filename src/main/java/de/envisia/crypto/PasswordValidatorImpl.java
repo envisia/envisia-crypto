@@ -20,7 +20,7 @@ public class PasswordValidatorImpl implements PasswordValidator {
     }
 
     @Override
-    public boolean verify(String password, String encoded) {
+    public boolean verify(String password, String encoded) throws HasherNotFoundException {
         Matcher m = pattern.matcher(encoded);
         if (m.matches()) {
             String algorithm = m.group(1);
@@ -32,7 +32,7 @@ public class PasswordValidatorImpl implements PasswordValidator {
                 PasswordHasher hasher = injector.getInstance(hasherKey);
                 return hasher.verify(password, hash, salt, iterations);
             } catch (ConfigurationException | ProvisionException e) {
-                return injector.getInstance(PasswordHasher.class).verify(password, hash, salt, iterations);
+                throw new HasherNotFoundException("Hasher with Algorithm: " + algorithm + " not found!");
             }
         } else {
             return false;
